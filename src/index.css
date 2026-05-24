@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050816;
+  --foreground: #edf2ff;
+  --muted: #9aa7c3;
+  --card: rgba(12, 18, 34, 0.92);
+  --card-strong: rgba(15, 23, 42, 0.98);
+  --border: rgba(255, 255, 255, 0.08);
+  --surface: rgba(255, 255, 255, 0.04);
+  --sidebar: rgba(6, 10, 23, 0.96);
+  --glass: rgba(255, 255, 255, 0.06);
+  --accent: #7c83ff;
+  --accent-strong: #9b5cff;
+  color-scheme: dark;
+}
+
+html.light {
+  /* Palette tuned to the provided light-theme design */
+  --background: #f6f9ff; /* very light bluish white */
+  --foreground: #0b1b33; /* deep navy for primary text */
+  --muted: #6b7280; /* muted slate for secondary text */
+  --card: rgba(255, 255, 255, 0.98);
+  --card-strong: rgba(255, 255, 255, 1);
+  --border: rgba(11, 27, 51, 0.06);
+  --surface: rgba(11, 27, 51, 0.03);
+  --sidebar: rgba(247, 250, 255, 0.95);
+  --glass: rgba(11, 27, 51, 0.025);
+  --accent: #6c63ff; /* purple accent from design */
+  --accent-strong: #8b5cff;
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.14), transparent 24%),
+    linear-gradient(180deg, #040712 0%, var(--background) 55%, #050915 100%);
+  color: var(--foreground);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html.light body {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.09), transparent 24%),
+    radial-gradient(circle at 80% 10%, rgba(139, 92, 246, 0.08), transparent 20%),
+    linear-gradient(180deg, #f7faff 0%, var(--background) 58%, #e8eef8 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.25);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .glass-border {
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  }
+
+  .text-on-accent {
+    color: #ffffff;
+  }
+
+  html.light .text-white:not(.text-on-accent) {
+    color: var(--foreground) !important;
+  }
+
+  html.light .text-slate-100,
+  html.light .text-slate-200 {
+    color: var(--foreground) !important;
+  }
+
+  html.light .text-slate-300 {
+    color: #475569 !important;
+  }
+
+  html.light .text-slate-400 {
+    color: var(--muted) !important;
+  }
+
+  html.light .text-white {
+    color: var(--foreground) !important;
+  }
+
+  html.light .border-white\/10,
+  html.light .border-white\/12,
+  html.light .border-white\/8 {
+    border-color: var(--border) !important;
+  }
+
+  html.light .bg-white\/5,
+  html.light .bg-white\/6,
+  html.light .bg-white\/7,
+  html.light .bg-white\/8,
+  html.light .bg-white\/10 {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+  }
+
+  html.light .shadow-glow {
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Catch any remaining inline or hard-coded white text in light mode */
+  html.light [style*="color: #fff"] { color: var(--foreground) !important; }
+  html.light [style*="color:#fff"] { color: var(--foreground) !important; }
+  html.light [style*="color: #ffffff"] { color: var(--foreground) !important; }
+  html.light [style*="color:white"] { color: var(--foreground) !important; }
+
+  /* Stronger fallback: ensure most visible text in light mode uses the foreground color
+     Exclude elements that explicitly opt-in for accent white using `text-on-accent`. */
+  html.light body :not(.text-on-accent) {
+    color: var(--foreground) !important;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
